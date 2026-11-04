@@ -9,7 +9,7 @@
 
 ## 快速开始
 
-1. 获取程序包（安装版或便携版，见 [发布说明](docs/RELEASE.md)）；
+1. 下载发布包：**[Release v2.10.79](https://github.com/caizongfei41/MANKE-AIGC/releases/tag/v2.10.79)**（安装版 / 便携版）；
 2. 首次启动输入激活密码：
    ```
    mankeaigc

@@ -7,19 +7,20 @@
 - 可执行文件：`Manke.exe`
 - 默认安装目录：`{系统盘}\Manke`
 
+## 发布页
+
+https://github.com/caizongfei41/MANKE-AIGC/releases/tag/v2.10.79
+
+> GitHub 会把非 ASCII 资产名替换掉，因此 Release 附件使用 `Manke_` 前缀；本地/网盘发布文件名仍是 `漫客_*`，内容与 SHA-256 一致。
+
 ## 程序包
 
-发布页：https://github.com/caizongfei41/MANKE-AIGC/releases/tag/v2.10.79
-（安装包与便携包已作为 Release 附件上传）
+| 形态 | 本地文件名 | GitHub 附件 | 大小 | SHA-256 |
+|------|------------|-------------|------|---------|
+| 安装版 | `漫客_安装程序_v2.10.79_release_20261021.exe` | `Manke_Setup_v2.10.79_release_20261021.exe` | 158.2 MB | `22fb93e086fdf1d413befbb3f46c427e1295f5394ac316801b96e00e5b1a2278` |
+| 便携版 | `漫客_便携版_v2.10.79_activated_20261021.7z` | `Manke_Portable_v2.10.79_activated_20261021.7z` | 146.6 MB | `c44d44f2585cf23de8326f30294e7d5d99a2f740a014afe97d232a62499aeb14` |
 
-发布目录中也提供两种形态：
-
-| 形态 | 文件名 | 大小 | SHA-256 |
-|------|--------|------|---------|
-| 安装版 | `漫客_安装程序_v2.10.79_release_20261021.exe` | 158.2 MB | `22fb93e086fdf1d413befbb3f46c427e1295f5394ac316801b96e00e5b1a2278` |
-| 便携版 | `漫客_便携版_v2.10.79_activated_20261021.7z` | 146.6 MB | `c44d44f2585cf23de8326f30294e7d5d99a2f740a014afe97d232a62499aeb14` |
-
-> 便携版解压即用；安装版带开始菜单/桌面快捷方式与卸载项。两者数据都保存在程序目录 `data\`。
+便携版解压即用；安装版带开始菜单/桌面快捷方式与卸载项。两者数据都保存在程序目录 `data\`。
 
 ## 目录约定
 
