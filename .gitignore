@@ -1,0 +1,28 @@
+# 程序与模型（不入库）
+/models/
+/backends/
+/data/
+/resources/
+*.7z
+*.zip
+*.rar
+*.exe
+*.dll
+*.asar
+*.pak
+*.bin
+*.dat
+*.node
+
+# 依赖与构建产物
+node_modules/
+dist/
+out/
+build/
+*.log
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
