@@ -37,12 +37,18 @@ MANKE-AIGC/
 ├─ README.md
 ├─ .gitignore
 ├─ docs/
-│  ├─ MODELS.md        # 模型包下载、校验、安装
-│  ├─ ACTIVATION.md    # 密码激活与重置
-│  └─ RELEASE.md       # 程序包、版本与校验值
+│  ├─ MODELS.md          # 模型包下载、校验、安装
+│  ├─ ACTIVATION.md      # 密码激活与重置
+│  ├─ RELEASE.md         # 程序包、版本与校验值
+│  └─ BUILD.md           # 构建与二次打包说明
+├─ installer/
+│  └─ manke.iss          # Inno Setup 安装包模板
 └─ scripts/
-   └─ verify-models.ps1  # 模型包 SHA-256 校验脚本
+   ├─ verify-models.ps1  # 模型包 SHA-256 校验脚本
+   └─ build-portable.ps1 # 便携包构建脚本
 ```
+
+构建/二次打包见 **[docs/BUILD.md](docs/BUILD.md)**。
 
 ## 说明
 
