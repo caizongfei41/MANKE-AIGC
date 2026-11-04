@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "product": "漫客 AIGC 本地画布",
+  "download": {
+    "quark": "https://pan.quark.cn/s/241930f81fc9",
+    "code": "/~8a763c40Ng~/"
+  },
+  "packs": [
+    {
+      "name": "漫客_模型包_video_v1.2.0.7z",
+      "tier": "video",
+      "version": "1.2.0",
+      "sizeBytes": 64585988356,
+      "sha256": "a16577a9b5e9768a9a9105b995cc821517c8c80c95ca2852399a6ab8d6ed798e",
+      "required": true
+    },
+    {
+      "name": "漫客_模型包_video_v1.1.0.7z",
+      "tier": "video",
+      "version": "1.1.0",
+      "sizeBytes": 63561052533,
+      "sha256": "467140107e89a3a57cee3802d6938d1d702b28919b355aa399597e66b1e9ee9b",
+      "required": false
+    },
+    {
+      "name": "漫客_模型包_image_v1.1.0.7z",
+      "tier": "image",
+      "version": "1.1.0",
+      "sizeBytes": 45856050766,
+      "sha256": "a7eaff5b4fee64a4d9712c6f2ffe0f3986476c882dd598ea45a4a57ded753a3b",
+      "required": true
+    },
+    {
+      "name": "漫客_模型包_qwen_v1.1.0.7z",
+      "tier": "qwen",
+      "version": "1.1.0",
+      "sizeBytes": 36278795405,
+      "sha256": "bc1278e031698ae6ad5375d9e4d580bdf3b932089a9e4c646109234205d4a42c",
+      "required": false
+    },
+    {
+      "name": "漫客_模型包_voice_v1.1.0.7z",
+      "tier": "voice",
+      "version": "1.1.0",
+      "sizeBytes": 13182037386,
+      "sha256": "2396a902916cf9e0825819088b4c85039a15cd3785c12860f8ebf36b614d152c",
+      "required": true
+    }
+  ]
+}

@@ -50,3 +50,11 @@ powershell -ExecutionPolicy Bypass -File .\scripts\verify-models.ps1 -Path "D:\�
 - **解压报 CRC Failed**：优先重新拷贝/重新下载，不要断点续传；拷完先用上面的脚本校验；
 - **软件里显示未登记版本**：说明模型目录里缺少 `models.manifest.json` 或清单损坏，功能一般仍可用，但无法做版本契约校验；
 - **模型包能混用吗**：按层安装即可；视频/生图/语音互不依赖，Qwen 为可选附加。
+
+## 自动校验（GitHub Actions）
+
+工作流：[`.github/workflows/verify-models.yml`](../.github/workflows/verify-models.yml)
+
+- **每次 push / PR**：校验 [`models/models.manifest.json`](../models/models.manifest.json) 与本文档表格是否一致（名称、大小、SHA-256），并检查 README/本文档仍包含网盘链接与口令；
+- **手动触发**：在 Actions 页面选择 `verify-models` → `Run workflow`，指定模型包目录，由带 `self-hosted, windows, models` 标签的 runner 对本地 `.7z` 逐文件计算 SHA-256（大文件不适合上传到托管 runner）；
+- **单一事实源**：新增/更换模型包时，同时修改 `models/models.manifest.json` 与本文档表格，CI 会拦截不一致。

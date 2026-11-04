@@ -1,5 +1,7 @@
-# 程序与模型（不入库）
-/models/
+# 程序与模型（不入库；models 仅保留清单）
+/models/*
+!/models/models.manifest.json
+!/models/README.md
 /backends/
 /data/
 /resources/

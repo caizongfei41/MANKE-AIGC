@@ -1,5 +1,7 @@
 # MANKE-AIGC 本地画布
 
+![模型包校验](https://github.com/caizongfei41/MANKE-AIGC/actions/workflows/verify-models.yml/badge.svg)
+
 漫客 AIGC 本地无限画布 —— 把视频、图片、语音的本地生成能力放进一张可自由编排的画布。
 
 - 当前版本：**v2.10.79**（build 689）

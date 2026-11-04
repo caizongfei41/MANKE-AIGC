@@ -1,0 +1,62 @@
+name: verify-models
+
+on:
+  push:
+    paths:
+      - 'models/**'
+      - 'docs/MODELS.md'
+      - 'README.md'
+      - 'scripts/verify-models*'
+      - '.github/workflows/verify-models.yml'
+  pull_request:
+    paths:
+      - 'models/**'
+      - 'docs/MODELS.md'
+      - 'README.md'
+      - 'scripts/verify-models*'
+      - '.github/workflows/verify-models.yml'
+  workflow_dispatch:
+    inputs:
+      packs_dir:
+        description: '模型包所在目录（仅自托管 Windows runner 使用）'
+        required: false
+        default: 'D:\models'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-models-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  manifest:
+    name: 清单与文档一致性
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify models manifest vs docs
+        run: node scripts/verify-models-manifest.mjs
+
+  packs:
+    name: 实包 SHA-256 校验（自托管）
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: [self-hosted, windows, models]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify local model packs
+        shell: powershell
+        env:
+          PACKS_DIR: ${{ inputs.packs_dir }}
+        run: |
+          powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-models.ps1 `
+            -Path "$env:PACKS_DIR" -Manifest "models/models.manifest.json"
