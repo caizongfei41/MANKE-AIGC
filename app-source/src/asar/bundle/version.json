@@ -1,0 +1,21 @@
+{
+  "product": "漫客",
+  "channel": "release",
+  "program": {
+    "version": "2.10.79",
+    "build": 689,
+    "builtAt": "2026-11-01T22:01:21",
+    "gitCommit": "0d25d5c",
+    "versionedAt": "2026-11-01T22:01:07",
+    "watermark": "AC-2.10.79-20261101-P52E",
+    "watermarkAt": "2026-11-01T22:01:21",
+    "watermarkedFor": ""
+  },
+  "models": {
+    "packVersion": "1.2.0",
+    "apiVersion": 1,
+    "minProgramVersion": "2.0.256",
+    "builtAt": "2026-09-30T16:08:46"
+  }
+}
+     

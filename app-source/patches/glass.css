@@ -1,0 +1,246 @@
+/* ============================================================
+   ManKe Glass UI — 玻璃拟态主题 + 字体清晰度增强
+   仅覆盖视觉层（背景/边框/阴影/模糊/字号/对比），不改布局
+   ============================================================ */
+:root{
+  --mk-bg:#070911;
+  --mk-glass:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
+  --mk-glass-strong:linear-gradient(145deg,rgba(255,255,255,.15),rgba(255,255,255,.055));
+  --mk-border:rgba(255,255,255,.14);
+  --mk-border-soft:rgba(255,255,255,.08);
+  --mk-shadow:0 18px 48px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.10);
+  --mk-shadow-sm:0 8px 24px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.07);
+  --mk-accent:#ff6a3d;
+  --mk-accent-2:#ff9a6b;
+
+  --text:#f3f6fc;
+  --text-dim:#bcc5d6;
+  --text-faint:#8f98aa;
+  --border:rgba(255,255,255,.14);
+  --border-strong:rgba(255,255,255,.22);
+  --bg:#070911;
+  --bg-soft:rgba(255,255,255,.06);
+  --bg-elev:rgba(18,20,28,.72);
+  --bg-hover:rgba(255,255,255,.09);
+  --accent:#ff6a3d;
+  --accent2:#ff9a6b;
+  --on-accent:#fff;
+  --text-strong:#fff;
+
+  --radius:16px;
+  --radius-sm:11px;
+  --radius-xs:8px;
+  --fz-h1:18px;
+  --fz-h2:15px;
+  --fz-h3:13.5px;
+  --fz-cap:12px;
+  --fz-micro:11px;
+  --fw-bold:650;
+  --fw-med:520;
+  --fw-norm:430;
+}
+html,body{background:var(--mk-bg)!important}
+body{
+  color:var(--text);
+  font-size:var(--fz-h2);
+  font-weight:var(--fw-norm);
+  letter-spacing:.012em;
+  line-height:1.58;
+  -webkit-font-smoothing:auto;
+  text-rendering:optimizeLegibility;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background:
+    radial-gradient(1100px 760px at 8% -12%,rgba(96,124,255,.30),transparent 62%),
+    radial-gradient(880px 680px at 92% -6%,rgba(255,106,61,.20),transparent 58%),
+    radial-gradient(1000px 820px at 50% 112%,rgba(124,86,255,.24),transparent 62%),
+    linear-gradient(180deg,#0b0e18 0%,#070911 52%,#05060b 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.45;
+  background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1px);
+  background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 18%,#000 0%,transparent 78%);
+  mask-image:radial-gradient(ellipse at 50% 18%,#000 0%,transparent 78%);
+}
+::selection{background:rgba(255,106,61,.35);color:#fff}
+
+/* 页面根：让全局氛围层透出来 */
+.welcome,.home,.canvas-page,.studio{
+  background:transparent!important;
+  color:var(--text);
+}
+.welcome,.home{
+  --bg:transparent!important;
+  --bg-soft:rgba(255,255,255,.06)!important;
+  --bg-elev:rgba(18,20,28,.72)!important;
+  --bg-hover:rgba(255,255,255,.09)!important;
+  --border:rgba(255,255,255,.14)!important;
+  --border-strong:rgba(255,255,255,.22)!important;
+  --text:#f3f6fc!important;
+  --text-dim:#bcc5d6!important;
+  --text-faint:#8f98aa!important;
+  --accent:#ff6a3d!important;
+  --accent2:#ff9a6b!important;
+  --on-accent:#fff!important;
+  --text-strong:#fff!important;
+}
+.welcome__aurora,.home__aurora{opacity:.55!important;filter:blur(72px) saturate(145%)}
+
+/* ============================ 玻璃面板 ============================ */
+.welcome__card,.welcome__choice,.welcome__tile,
+.home__card,.home__cfgcard,.home__run,
+.backend-card,.instcard,.api-card,.hist-card,.script-bd__card,.vcompare__card,
+.theme-pick__card,.licgate__card,.frw__card,.mempop__card,.api-pop__card,
+.sidepanel,.drawer,.pmenu,.canvas-ctl-panel,.tb-panel,.studio__panel,
+.studio__histpanel,.api-panel,.canvas-agent,.canvas-agent__railcard,.selfcheck,
+.vpanel,.script-bd__drawer,.lightbox__bar{
+  background:var(--mk-glass)!important;
+  border:1px solid var(--mk-border)!important;
+  border-radius:var(--radius)!important;
+  box-shadow:var(--mk-shadow)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  backdrop-filter:blur(18px) saturate(160%);
+}
+.welcome__card:hover,.welcome__choice:hover,.welcome__tile:hover,
+.home__card:hover,.backend-card:hover,.api-card:hover,.hist-card:hover{
+  background:var(--mk-glass-strong)!important;
+  border-color:rgba(255,255,255,.22)!important;
+  box-shadow:0 22px 56px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.12)!important;
+}
+
+/* 顶部条 / 工具栏 */
+.welcome__top,.home__top,.studio__head,.studio__bar,.toolbar,.rs__toolbar{
+  background:linear-gradient(180deg,rgba(16,18,26,.72),rgba(12,14,20,.42))!important;
+  border:1px solid var(--mk-border)!important;
+  border-radius:14px!important;
+  -webkit-backdrop-filter:blur(18px) saturate(150%);
+  backdrop-filter:blur(18px) saturate(150%);
+  box-shadow:0 10px 30px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.07)!important;
+}
+
+/* 节点卡片 */
+.node-card,.node-shell,.react-flow__node{
+  background:linear-gradient(160deg,rgba(22,26,36,.80),rgba(11,13,19,.64))!important;
+  border:1px solid var(--mk-border)!important;
+  border-radius:14px!important;
+  box-shadow:0 14px 36px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.07)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(150%);
+  backdrop-filter:blur(14px) saturate(150%);
+}
+.react-flow__node.selected .node-card,.react-flow__node.selected .node-shell{
+  border-color:rgba(255,106,61,.55)!important;
+  box-shadow:0 0 0 1px rgba(255,106,61,.35),0 18px 44px rgba(0,0,0,.5)!important;
+}
+.node-media,.node-media__empty,.node-media__placeholder{border-radius:11px!important}
+
+/* 下拉/浮层 */
+.pmenu,.api-pop__card,.mempop__card,.node-quick-menu,.vout-frame-menu,.lightbox__bar{
+  background:rgba(14,16,24,.76)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(170%);
+  backdrop-filter:blur(24px) saturate(170%);
+  border:1px solid var(--mk-border)!important;
+  border-radius:14px!important;
+  box-shadow:0 26px 64px rgba(0,0,0,.55)!important;
+}
+.drawer-mask{background:rgba(4,6,10,.55)!important;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+
+/* ============================ 按钮 ============================ */
+[class*="__btn"]:not(.react-flow__controls-button),
+.btn,.btn-sm,.welcome__act,.welcome__gear,.welcome__seriesbtn,.home__nextbtn,
+.home__back,.home__togo,.selfcheck__refresh,.selfcheck__action,.pagebtn,
+.tour__btn,.pbtn,.pbtn-wrap,.canvas-ctl__btn,.hist-card__more,.hist-card__btn,
+.script-bd__tab,.studio__setbtn,.studio__modelbtn,.tb-save-btn{
+  background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.04))!important;
+  border:1px solid var(--mk-border)!important;
+  color:var(--text)!important;
+  border-radius:10px!important;
+  box-shadow:0 6px 18px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.08)!important;
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+[class*="__btn"]:hover,.btn:hover,.btn-sm:hover,.welcome__act:hover,
+.welcome__gear:hover,.welcome__seriesbtn:hover,.home__nextbtn:hover,
+.pagebtn:hover,.pbtn:hover,.canvas-ctl__btn:hover{
+  background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.07))!important;
+  border-color:rgba(255,255,255,.24)!important;
+}
+.btn-accent,.btn-primary,.frw__btn--primary,.scp__btn,.voice-btn--primary,
+.backend-actions__btn--start,.hist-card__btn--prim{
+  background:linear-gradient(135deg,#ff6a3d,#ff8f5e)!important;
+  border-color:rgba(255,150,110,.6)!important;
+  color:#fff!important;
+  box-shadow:0 10px 26px rgba(255,106,61,.34),inset 0 1px 0 rgba(255,255,255,.25)!important;
+}
+.btn-danger,.btn-danger:hover,.is-danger{
+  background:linear-gradient(135deg,rgba(255,64,88,.18),rgba(255,64,88,.08))!important;
+  border-color:rgba(255,90,110,.5)!important;
+  color:#ffb3bf!important;
+}
+button:focus-visible,a:focus-visible,[role="button"]:focus-visible{
+  outline:2px solid rgba(255,106,61,.65)!important;outline-offset:2px;
+}
+
+/* ============================ 输入控件 ============================ */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+textarea,select,
+.rs__input,.rs__select,.set-pop__input,.set-pop__select,.api-pop__input,
+.aics-prompt__input,.node-prompt__input,.node-script__editor,.welcome__name-input{
+  background:rgba(8,10,16,.55)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  color:var(--text)!important;
+  border-radius:10px!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+input:focus,textarea:focus,select:focus,
+.rs__input:focus,.rs__select:focus,.set-pop__input:focus,.set-pop__select:focus,
+.api-pop__input:focus,.aics-prompt__input:focus,.node-prompt__input:focus,
+.node-script__editor:focus,.welcome__name-input:focus{
+  border-color:rgba(255,106,61,.7)!important;
+  box-shadow:0 0 0 3px rgba(255,106,61,.18),inset 0 1px 0 rgba(255,255,255,.05)!important;
+  outline:none!important;
+}
+input::placeholder,textarea::placeholder{color:rgba(200,208,224,.55)!important}
+
+/* ============================ 标签/徽章 ============================ */
+[class*="chip"],.badge,.ptag__chip,.ratio-chip,.lang-chip,.sf-chip,.tb-badge,
+.qrow__badge,.api-pop__badge,.home__cfcbadge,.selfcheck__badge{
+  background:rgba(255,255,255,.07)!important;
+  border:1px solid var(--mk-border-soft)!important;
+  color:var(--text-dim)!important;
+  border-radius:999px!important;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+
+/* ============================ 文本 ============================ */
+.welcome__hello,.home__title,.pagetitle,.welcome__rectitle,.selfcheck__title,
+.node-card__title,.studio__panelhead,.sidepanel__title,.tour__title{
+  color:#fff!important;
+  font-weight:var(--fw-bold)!important;
+  letter-spacing:-.01em!important;
+  text-shadow:0 1px 0 rgba(0,0,0,.30);
+}
+.welcome__hello{font-size:30px!important;line-height:1.28!important}
+.welcome__sub,.home__sub,.pagesub,.selfcheck__detail,.welcome__meta,.welcome__info,
+.home__stamp,.dim,.pageeyebrow,.welcome__quicktag,.home__eyebrow{
+  color:var(--text-dim)!important;
+}
+.welcome__quicktag,.pageeyebrow{letter-spacing:.12em!important}
+.selfcheck__row{border-bottom:1px solid rgba(255,255,255,.06)!important;padding:11px 2px!important}
+.selfcheck__row:last-child{border-bottom:0!important}
+
+/* 滚动条 */
+*{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.22) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,.12));
+  border-radius:999px;border:2px solid transparent;background-clip:padding-box;
+}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,106,61,.45);border:2px solid transparent;background-clip:padding-box}
+
+/* 画布背景弱化，突出节点 */
+.react-flow__background{opacity:.45}
+.react-flow__edge-path{stroke:rgba(180,195,220,.45)}
+.react-flow__edge.selected .react-flow__edge-path{stroke:rgba(255,106,61,.8)}

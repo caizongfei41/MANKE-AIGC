@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D导演台 Demo</title>
+    <style>
+      html,
+      body,
+      #root {
+        height: 100%;
+        margin: 0;
+        background: #090909;
+      }
+    </style>
+    <script type="module" crossorigin src="/director-desk/assets/index-DGER5_0h.js"></script>
+    <link rel="stylesheet" crossorigin href="/director-desk/assets/index-DextJMUv.css">
+    <!--
+      2026-10-04 用户: "整个画布必须用思源黑体…不允许出现其他的字体"。
+      导演台是 iframe 里的**独立文档**, 自带那份 bundle 的 CSS 写的是 Inter / 苹方 / 系统字体,
+      拿不到主界面的 @font-face —— 这里补一层: 同一份自带字体 + 覆盖它自己声明过字体的三层
+      (:root / 顶栏 / 右侧属性栏)。放在它的样式表之后, 同优先级下后写的生效。
+    -->
+    <style>
+      @font-face {
+        font-family: 'Source Han Sans SC';
+        src: url('/fonts/NotoSansSC-VF.ttf') format('truetype-variations');
+        font-weight: 100 900; font-style: normal; font-display: swap;
+      }
+      :root, body, .top-bar, .right-inspector, .left-sidebar, button, input, select, textarea {
+        font-family: 'Source Han Sans SC', 'Noto Sans SC', sans-serif !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  </html>

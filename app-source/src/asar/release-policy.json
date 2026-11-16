@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-01T14:02:50.420Z",
+  "mode": "local-unsigned",
+  "authenticode": {
+    "required": false,
+    "thumbprint": ""
+  },
+  "bundleIntegrity": {
+    "required": true,
+    "manifest": "bundle-integrity.json"
+  },
+  "debuggerGuard": true,
+  "protector": {
+    "required": false,
+    "name": "",
+    "configured": false
+  }
+}

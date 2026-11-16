@@ -45,12 +45,28 @@ MANKE-AIGC/
 │  └─ BUILD.md           # 构建与二次打包说明
 ├─ installer/
 │  └─ manke.iss          # Inno Setup 安装包模板
-└─ scripts/
-   ├─ verify-models.ps1  # 模型包 SHA-256 校验脚本
-   └─ build-portable.ps1 # 便携包构建脚本
+├─ scripts/
+│  ├─ verify-models.ps1  # 模型包 SHA-256 校验脚本
+│  └─ build-portable.ps1 # 便携包构建脚本
+└─ app-source/           # 可维护工程（解包后的主进程/前端 bundle）
+   ├─ src/asar/          # app.asar 解包内容
+   ├─ patches/           # 玻璃 UI、标签、LoRA 补丁
+   ├─ tools/             # 同步、构建、校验脚本
+   ├─ installer/         # 可重建的 Inno 模板
+   └─ docs/              # 源码构建说明
 ```
 
-构建/二次打包见 **[docs/BUILD.md](docs/BUILD.md)**。
+构建/二次打包见 **[docs/BUILD.md](docs/BUILD.md)**；应用源码工程见 **[app-source/README.md](app-source/README.md)**。
+
+### 源码工程说明
+
+`app-source/` 是从 v2.10.79 安装包解包整理的可维护工程，包含：
+
+- `src/asar/`：`main.cjs`、`preload.cjs`、`server.mjs`、前端 `bundle/`；
+- `patches/`：玻璃 UI、素材标签同步、LoRA 多选等补丁；
+- `tools/`：`sync_source.ps1`（同步 bundle 并更新 asar 头/exe 清单）、`build_installer.ps1`、`build_portable.ps1`、`verify.py`。
+
+`runtime/` 运行目录（含 246MB `Manke.exe`）不进入 Git，使用 Release 安装包解压即可；具体命令见 `app-source/docs/BUILD.md`。
 
 ## 说明
 

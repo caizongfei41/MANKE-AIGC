@@ -1,0 +1,9 @@
+{
+  "name": "manke",
+  "version": "2.10.79",
+  "private": true,
+  "description": "漫客 (本地无限画布) · 本地 AI 创作工具",
+  "author": "FG",
+  "license": "UNLICENSED",
+  "main": "main.cjs"
+}             

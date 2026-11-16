@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 品牌图标: 漫客 字母标(黑底圆角方标), 见 public/logo-black.png -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>漫客</title>
+    <script type="module" crossorigin src="/assets/index-B_iCUypA.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-XKyaHtl9.js">
+    <link rel="modulepreload" crossorigin href="/assets/flow-BwhC0Loo.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CcYnJdeT.js">
+    <link rel="modulepreload" crossorigin href="/assets/persist-CCIfivzn.js">
+    <link rel="modulepreload" crossorigin href="/assets/assets-OzkdXGWg.js">
+    <link rel="stylesheet" crossorigin href="/assets/style-CFwmijmk.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  <script id="mkTagFocus">(function(){var l=null;function f(){var i=document.querySelector(".node-card__tag-input");if(i&&i!==l){l=i;requestAnimationFrame(function(){try{i.focus();i.select()}catch(e){}})}if(!i)l=null}new MutationObserver(f).observe(document.documentElement,{childList:true,subtree:true});document.addEventListener("DOMContentLoaded",f);f()})();</script>
+  <style>.canvas-page--hand .node-card__tag{pointer-events:auto!important;cursor:text!important}.canvas-page--hand .node-card__tag *{pointer-events:none!important}.mk-insert-all{margin-left:auto;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#eaf0fb;border-radius:8px;font-size:12px;padding:4px 10px;cursor:pointer}.mk-insert-all:hover{background:rgba(255,255,255,.16)}html.theme-light .mk-insert-all{background:rgba(255,255,255,.8);color:#1b2434;border-color:rgba(15,23,42,.14)}</style>
+  <script id="mkAssetTags">(function(){
+  if(window.__mkAssetTags) return; window.__mkAssetTags=1;
+  var api={
+    get:function(k){return fetch('/api/store/get?key='+encodeURIComponent(k)).then(function(r){return r.json()}).then(function(j){return j&&j.ok?j.value:null}).catch(function(){return null})},
+    put:function(k,v){return fetch('/api/store/put',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:k,value:v})}).then(function(r){return r.json()}).catch(function(){return null})}
+  };
+  function txt(e){return e?e.textContent.trim():''}
+  function series(){var t=txt(document.querySelector('.lib-pop__proj'));var m=t.match(/剧集「(.+?)」/);return m?m[1]:''}
+  function projectId(){return api.get('aics.projects.v1').then(function(v){return v&&v.currentId})}
+  function keys(pid){
+    if(!pid) return Promise.resolve([]);
+    return api.get('aics.projects.v1').then(function(v){
+      var out=[],p=(v&&v.projects||[]).filter(function(x){return x.id===pid})[0];
+      if(p&&p.series) out.push('aics.assets.series.'+p.series);
+      var s=series(); if(s) out.push('aics.assets.series.'+s);
+      out.push('aics.assets.'+pid);
+      return out.filter(function(x,i){return out.indexOf(x)===i});
+    });
+  }
+  function cards(){return [].slice.call(document.querySelectorAll('.lib-pop .asset-cell'))}
+  function setTag(card,title){var n=card.querySelector('.asset-cell__name'); if(n&&n.textContent!==title) n.textContent=title}
+  function assetId(card){
+    try{
+      var k=Object.keys(card).filter(function(x){return x.indexOf('__reactFiber')===0})[0];
+      return k&&card[k]&&card[k].key?String(card[k].key):'';
+    }catch(e){return ''}
+  }
+  function refresh(){
+    projectId().then(function(pid){
+      if(!pid) return;
+      return keys(pid).then(function(ks){
+        return Promise.all([api.get('aics.graph.'+pid)].concat(ks.map(function(k){return api.get(k)}))).then(function(res){
+          var g=res[0]; if(!g||!Array.isArray(g.nodes)) return;
+          var nodes={}; g.nodes.forEach(function(n){nodes[n.id]=n});
+          var lists=res.slice(1);
+          cards().forEach(function(card){
+            var hit=null,aid=assetId(card);
+            if(aid){
+              for(var z=0;z<lists.length&&!hit;z++){
+                var lz=lists[z]; if(!Array.isArray(lz)) continue;
+                for(var y=0;y<lz.length;y++){var iz=lz[y]; if(iz&&iz.id===aid&&iz.sourceNodeId&&nodes[iz.sourceNodeId]){hit=iz;break}}
+              }
+            }
+            if(hit){var n=nodes[hit.sourceNodeId]; if(n.data&&n.data.title) setTag(card,n.data.title)}
+          });
+        });
+      });
+    });
+  }
+  function syncNode(id,title){
+    if(!id||!title) return;
+    setTimeout(function(){
+      projectId().then(function(pid){return keys(pid).then(function(ks){return {pid:pid,ks:ks}})}).then(function(o){
+        o.ks.forEach(function(k){api.get(k).then(function(list){
+          if(!Array.isArray(list)) return; var ch=false;
+          list.forEach(function(it){if(it.sourceNodeId===id&&(!o.pid||it.ownerProjectId===o.pid)&&it.title!==title){it.title=title;ch=true}});
+          if(ch) api.put(k,list);
+        })});
+      });
+    },1200);
+  }
+  document.addEventListener('dblclick',function(e){
+    var tag=e.target&&e.target.closest?e.target.closest('.node-card__tag'):null;
+    if(!tag||!document.querySelector('.canvas-page--hand')) return;
+    var b=[].slice.call(document.querySelectorAll('button')).filter(function(x){return (x.title||'').indexOf('指针')===0})[0];
+    if(!b) return;
+    e.preventDefault(); e.stopPropagation();
+    b.click();
+    setTimeout(function(){
+      var r=tag.getBoundingClientRect();
+      ['mousedown','mouseup','click','dblclick'].forEach(function(t){
+        tag.dispatchEvent(new MouseEvent(t,{bubbles:true,cancelable:true,view:window,clientX:r.x+5,clientY:r.y+5,detail:t==='dblclick'?2:1}));
+      });
+      var tries=0,it=setInterval(function(){
+        var i=tag.parentElement&&tag.parentElement.querySelector('.node-card__tag-input');
+        if(i){ if(document.activeElement!==i){i.focus();i.select()} if(document.activeElement===i) clearInterval(it); }
+        if(++tries>12) clearInterval(it);
+      },120);
+    },80);
+  },true);
+  function target(t){
+    if(!t||!t.classList||!t.classList.contains('node-card__tag-input')) return null;
+    var n=t.closest('.react-flow__node'),id=n&&n.getAttribute('data-id'),title=t.value.trim();
+    return id&&title?{id:id,title:title}:null;
+  }
+  document.addEventListener('keydown',function(e){if(e.key!=='Enter')return;var x=target(e.target);if(x)syncNode(x.id,x.title)},true);
+  document.addEventListener('focusout',function(e){var x=target(e.target);if(x)syncNode(x.id,x.title)},true);
+  function enhance(card){
+    if(card.dataset.mkTag) return; card.dataset.mkTag='1';
+    var n=card.querySelector('.asset-cell__name');
+    if(n){n.title='名称跟随节点标签';n.style.cursor='default'}
+  }
+  function insertAll(){
+    [].slice.call(document.querySelectorAll('.lib-pop .asset-cell__main')).forEach(function(b){try{b.click()}catch(e){}});
+  }
+  function decorate(lib){
+    var head=lib.querySelector('.lib-pop__head'); if(!head||head.querySelector('.mk-insert-all')) return;
+    var b=document.createElement('button'); b.className='mk-insert-all'; b.textContent='全选接入'; b.title='把当前素材全部接入画布';
+    b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();insertAll()});
+    head.appendChild(b);
+  }
+  function namesFrom(text){
+    var out=[],re=/@([^\s@，,。:：;；、]+)/g,m;
+    while((m=re.exec(text))) out.push(m[1].replace(/[）)]$/,''));
+    return out;
+  }
+  function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+  async function attachNames(names){
+    for(var i=0;i<names.length;i++){
+      var n=names[i];
+      if(!document.querySelector('.lib-pop')){
+        var open=[].slice.call(document.querySelectorAll('button')).filter(function(b){return (b.title||'').indexOf('打开素材库')===0})[0];
+        if(open) open.click();
+        await sleep(900);
+      }
+      var cs=cards(),card=null;
+      for(var j=0;j<cs.length;j++){var t=txt(cs[j].querySelector('.asset-cell__name')); if(t===n){card=cs[j];break}}
+      if(!card){for(var k=0;k<cs.length;k++){var t2=txt(cs[k].querySelector('.asset-cell__name')); if(t2&& (t2.indexOf(n)>=0||n.indexOf(t2)>=0)){card=cs[k];break}}}
+      if(card){var btn=card.querySelector('.asset-cell__main'); if(btn){btn.click(); await sleep(700)}}
+    }
+  }
+  document.addEventListener('paste',function(e){
+    var t=e.target; if(!t) return;
+    var ok=t.tagName==='TEXTAREA'||t.tagName==='INPUT'||t.isContentEditable; if(!ok) return;
+    var text=(e.clipboardData||window.clipboardData).getData('text')||'';
+    var names=namesFrom(text); if(names.length) setTimeout(function(){attachNames(names)},500);
+  },true);
+  var last=null;
+  function scan(){
+    cards().forEach(enhance);
+    var lib=document.querySelector('.lib-pop');
+    if(lib&&lib!==last){last=lib;decorate(lib);setTimeout(refresh,700);setTimeout(refresh,1800)}
+    if(!lib) last=null;
+  }
+  document.addEventListener('DOMContentLoaded',scan);
+  new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});
+  scan();
+})();
+</script>
+  </body>
+</html>
+     

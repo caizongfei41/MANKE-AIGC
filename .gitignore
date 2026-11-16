@@ -28,3 +28,7 @@ build/
 Thumbs.db
 .vscode/
 .idea/
+
+# app-source 是可维护源码，重新包含被通用构建规则忽略的 bundle/dist
+!app-source/
+!app-source/**

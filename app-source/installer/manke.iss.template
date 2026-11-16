@@ -1,0 +1,38 @@
+﻿[Setup]
+AppId={{3C9E2F41-7A6B-4D2E-9F10-8B5C4A1D2E63}
+AppName=漫客
+AppVersion=2.10.79
+AppVerName=漫客 2.10.79
+AppPublisher=漫客
+DefaultDirName={sd}\Manke
+DefaultGroupName=漫客
+DisableProgramGroupPage=yes
+OutputDir={{OUTPUT}}
+OutputBaseFilename={{NAME}}
+Compression=lzma2/max
+SolidCompression=yes
+LZMAUseSeparateProcess=yes
+PrivilegesRequired=admin
+ArchitecturesAllowed=x64compatible
+ArchitecturesInstallIn64BitMode=x64compatible
+UninstallDisplayIcon={app}\Manke.exe
+UsePreviousAppDir=yes
+WizardStyle=modern
+SetupIconFile={{ICON}}
+
+[Languages]
+Name: "chinesesimplified"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
+
+[Tasks]
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
+
+[Files]
+{{FILES}}
+
+[Icons]
+Name: "{group}\漫客"; Filename: "{app}\Manke.exe"
+Name: "{group}\卸载 漫客"; Filename: "{uninstallexe}"
+Name: "{autodesktop}\漫客"; Filename: "{app}\Manke.exe"; Tasks: desktopicon
+
+[Run]
+Filename: "{app}\Manke.exe"; Description: "{cm:LaunchProgram,漫客}"; Flags: nowait postinstall skipifsilent
